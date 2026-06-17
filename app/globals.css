@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sidebar: var(--sidebar);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-muted: var(--muted);
+  --color-border-color: var(--border-color);
+  --font-sans: var(--font-inter), "San Francisco", "-apple-system", "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Charter", "Georgia", "New York", "Iowan Old Style", serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.04), 0 12px 24px rgba(0, 0, 0, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FBF9F6;
+  --foreground: #2D2A26;
+  --sidebar: #F2EFEA;
+  --surface: #FFFFFF;
+  --accent: #D9463E;
+  --accent-hover: #B73B34;
+  --muted: #8C857D;
+  --border-color: rgba(45, 42, 38, 0.08);
+}
+
+.dark {
+  --background: #111111;
+  --foreground: #EDEDED;
+  --sidebar: #1A1A1A;
+  --surface: #1E1E1E;
+  --accent: #E25850;
+  --accent-hover: #C94C45;
+  --muted: #8B8B8B;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* { 
+  scrollbar-width: thin; 
+  scrollbar-color: var(--muted) transparent; 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { transition: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection color */
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* Focus mode paragraph styling */
+.focus-mode .ProseMirror > * {
+  opacity: var(--focus-intensity, 0.3);
+  transition: opacity 0.5s ease;
+}
+
+.focus-mode .ProseMirror > *:hover,
+.focus-mode .ProseMirror > *.has-focus {
+  opacity: 1 !important;
+}
+
+/* Tiptap editor base styles */
+.ProseMirror {
+  outline: none;
+}
+.ProseMirror p {
+  margin-bottom: 1.5em;
 }
