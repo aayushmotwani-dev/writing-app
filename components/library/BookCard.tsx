@@ -54,6 +54,19 @@ export default function BookCard({ book, index }: BookCardProps) {
   const wordCount = book.manuscript ? book.manuscript.replace(/<[^>]*>?/gm, '').split(/\s+/).filter(Boolean).length : 0;
   const progressPercent = Math.min(100, (wordCount / 50000) * 100);
 
+  // Genre-based spine color
+  const genreColors: Record<string, string> = {
+    'Fantasy': '#6366F1',
+    'Sci-Fi': '#06B6D4',
+    'Thriller': '#EF4444',
+    'Romance': '#EC4899',
+    'Mystery': '#8B5CF6',
+    'Horror': '#1F2937',
+    'Literary Fiction': '#D97706',
+    'Historical': '#92400E',
+  };
+  const spineColor = genreColors[book.genre] || 'var(--accent)';
+
   const handleCardClick = () => {
     if (!isEditing && !showConfirmDelete && !isOpening) {
       setIsOpening(true);
@@ -93,11 +106,19 @@ export default function BookCard({ book, index }: BookCardProps) {
         whileHover={!isEditing && !showConfirmDelete && !isOpening ? { y: -2 } : {}}
         animate={isOpening ? { scale: 1.05, y: 15, opacity: 0 } : { scale: 1, y: 0, opacity: 1 }}
         transition={{ duration: isOpening ? 0.4 : 0.2, ease: isOpening ? "anticipate" : "easeOut" }}
-        className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface border border-border-color hover:border-accent/30 cursor-pointer group transition-colors"
+        className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface border border-border-color hover:border-accent/20 cursor-pointer group transition-all duration-300"
         style={{
-          boxShadow: 'inset 5px 0 10px rgba(0,0,0,0.06), inset 1px 0 2px rgba(255,255,255,0.8), 0 4px 10px rgba(0,0,0,0.05)'
+          boxShadow: 'inset 5px 0 10px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03)'
         }}
       >
+        {/* Colored genre spine */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 w-1 z-20"
+          style={{ background: `linear-gradient(to bottom, ${spineColor}, ${spineColor}88)` }}
+        />
+
+        {/* Paper texture gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-foreground/[0.02] pointer-events-none" />
 
         {/* Action Menu (Ellipsis) */}
         <div className="absolute top-3 right-3 z-20" ref={menuRef}>
@@ -240,20 +261,23 @@ export default function BookCard({ book, index }: BookCardProps) {
         </div>
 
         {/* Bottom metadata bar */}
-        <div className="absolute bottom-0 inset-x-0 p-4 flex flex-col gap-3 z-10 pointer-events-none">
+        <div className="absolute bottom-0 inset-x-0 p-4 flex flex-col gap-2.5 z-10 pointer-events-none bg-gradient-to-t from-surface/80 to-transparent">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-sans font-medium uppercase tracking-widest text-muted bg-background/50 px-2 py-1 rounded-sm border border-border-color">
+            <span className="text-[10px] font-sans font-medium uppercase tracking-widest text-muted px-2 py-0.5 rounded-sm border border-border-color bg-background/40 backdrop-blur-sm">
               {book.genre}
             </span>
             <div className="flex items-center gap-2 text-[10px] font-sans text-muted">
-              <span>{wordCount.toLocaleString()}w</span>
-              <span className="w-px h-3 bg-border-color" />
+              <span className="flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+                {wordCount.toLocaleString()}w
+              </span>
+              <span className="w-px h-2.5 bg-border-color" />
               <span>{formattedDate}</span>
             </div>
           </div>
-          {/* Progress bar (based on 50k goal) */}
-          <div className="w-full h-1 bg-border-color rounded-full overflow-hidden">
-            <div className="h-full bg-accent transition-all duration-1000" style={{ width: `${progressPercent}%` }} />
+          {/* Thin progress bar */}
+          <div className="w-full h-0.5 bg-border-color rounded-full overflow-hidden">
+            <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${progressPercent}%`, backgroundColor: spineColor }} />
           </div>
         </div>
       </motion.div>

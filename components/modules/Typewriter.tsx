@@ -347,12 +347,12 @@ export default function Typewriter() {
               <motion.span layout className="flex items-center gap-1.5 opacity-70">
                 {isSaving ? (
                   <>
-                    <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                     <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     <span>Saved</span>
                   </>
                 )}
@@ -361,13 +361,13 @@ export default function Typewriter() {
 
             {editorSettings.showAutoSave && <span className="w-px h-3 bg-border-color" />}
 
-            <motion.span layout>
-              <span className="font-medium text-foreground/70">{wordCount.toLocaleString()}</span>
+            <motion.span layout className="tabular-nums">
+              <span className="font-medium text-foreground/60">{wordCount.toLocaleString()}</span>
               {editorSettings.sessionGoal > 0 ? ` / ${editorSettings.sessionGoal.toLocaleString()} words` : ' words'}
             </motion.span>
             <span className="w-px h-3 bg-border-color" />
-            <motion.span layout>
-              <span className="font-medium text-foreground/70">{readingTime}</span> min read
+            <motion.span layout className="tabular-nums">
+              <span className="font-medium text-foreground/60">{readingTime}</span> min read
             </motion.span>
           </div>
         </div>
@@ -377,7 +377,7 @@ export default function Typewriter() {
           ref={scrollContainerRef}
           className={`flex-1 flex justify-center py-16 px-8 overflow-y-auto transition-all duration-700 ${
             focusMode ? "focus-mode" : ""
-          } ${editorSettings.fontFamily}`}
+          } ${editorSettings.fontFamily} font-prose`}
         >
           <div className={`${editorSettings.editorWidth} w-full relative`}>
             
@@ -385,13 +385,13 @@ export default function Typewriter() {
             <AnimatePresence>
               {editor && menuCoords && !editor.state.selection.empty && (
                 <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="fixed bg-surface/95 backdrop-blur-xl border border-border-color shadow-2xl rounded-xl p-1.5 flex items-center gap-1 z-50 pointer-events-auto"
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="fixed bg-surface/90 backdrop-blur-2xl border border-border-color/80 shadow-[0_4px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.06)] rounded-xl p-1.5 flex items-center gap-0.5 z-50 pointer-events-auto ring-1 ring-black/5"
                   style={{ top: menuCoords.top, left: menuCoords.left, transform: 'translateX(-50%)' }}
-                  onMouseDown={(e) => e.preventDefault()} // Prevent losing focus when clicking buttons
+                  onMouseDown={(e) => e.preventDefault()}
                 >
                   <button
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}

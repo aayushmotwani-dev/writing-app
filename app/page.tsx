@@ -57,6 +57,18 @@ export default function LibraryPage() {
             Manuscripta
           </motion.h1>
 
+          {/* Decorative flourish */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-3 mt-4"
+          >
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent/40" />
+            <svg width="12" height="12" viewBox="0 0 12 12" className="text-accent/40"><path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="currentColor"/></svg>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent/40" />
+          </motion.div>
+
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: -10 }}
@@ -108,7 +120,7 @@ export default function LibraryPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             suppressHydrationWarning
-            className="w-full pl-10 pr-4 py-2 bg-surface border border-border-color rounded-full text-sm outline-none focus:border-accent text-foreground transition-colors shadow-sm"
+            className="w-full pl-10 pr-4 py-2.5 bg-surface border border-border-color rounded-lg text-sm outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 text-foreground transition-all duration-200 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)] placeholder:text-muted/60"
           />
         </div>
         
@@ -125,16 +137,16 @@ export default function LibraryPage() {
             </select>
           )}
 
-          <div className="flex items-center bg-surface border border-border-color rounded-full p-1 shadow-sm shrink-0">
+          <div className="flex items-center bg-surface border border-border-color rounded-lg p-0.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)] shrink-0">
             <button
               onClick={() => setSortOption("edited")}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${sortOption === 'edited' ? 'bg-accent text-white' : 'text-muted hover:text-foreground'}`}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${sortOption === 'edited' ? 'bg-accent text-white shadow-sm' : 'text-muted hover:text-foreground'}`}
             >
               Recent
             </button>
             <button
               onClick={() => setSortOption("alphabetical")}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${sortOption === 'alphabetical' ? 'bg-accent text-white' : 'text-muted hover:text-foreground'}`}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${sortOption === 'alphabetical' ? 'bg-accent text-white shadow-sm' : 'text-muted hover:text-foreground'}`}
             >
               A-Z
             </button>

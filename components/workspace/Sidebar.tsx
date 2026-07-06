@@ -173,17 +173,21 @@ export default function Sidebar() {
             <button
               key={key}
               onClick={() => setActiveModule(key)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer group
-                         transition-all duration-300 text-left
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg cursor-pointer group relative
+                         transition-all duration-200 text-left
                          ${
                            isActive
                              ? "bg-surface text-foreground shadow-sm font-medium border border-border-color/50"
                              : "text-muted hover:text-foreground hover:bg-surface/50 border border-transparent"
                          }`}
             >
-              <span className="shrink-0">{icon}</span>
+              {/* Active indicator bar */}
+              {isActive && (
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-accent rounded-r-full" />
+              )}
+              <span className={`shrink-0 transition-colors duration-200 ${isActive ? 'text-accent' : ''}`}>{icon}</span>
               <span className="text-sm flex-1">{label}</span>
-              <span className="text-[10px] font-mono opacity-0 group-hover:opacity-40 transition-opacity">⌘{NAV_ITEMS.findIndex(i => i.key === key) + 1}</span>
+              <span className="text-[10px] font-mono opacity-0 group-hover:opacity-40 transition-opacity">{NAV_ITEMS.findIndex(i => i.key === key) + 1}</span>
             </button>
           );
         })}
@@ -195,12 +199,12 @@ export default function Sidebar() {
             <div className="space-y-3">
               {activeBook.acts.map(act => (
                 <div key={act.id} className="group/act">
-                  <div className="text-[11px] font-bold text-foreground/70 py-1 pl-2 uppercase tracking-wide">{act.title}</div>
-                  <div className="pl-4 ml-2 border-l border-border-color/50 space-y-1.5 mt-1">
+                  <div className="text-[11px] font-semibold text-foreground/60 py-1 pl-2 uppercase tracking-wider">{act.title}</div>
+                  <div className="pl-4 ml-2 border-l border-border-color/30 space-y-0.5 mt-1">
                     {activeBook.beats.filter(b => b.actId === act.id).map(beat => (
                       <div 
                         key={beat.id} 
-                        className="text-[11px] text-muted truncate hover:text-accent cursor-pointer transition-colors py-0.5"
+                        className="text-[11px] text-muted/80 truncate hover:text-accent cursor-pointer transition-colors duration-150 py-0.5 pl-2 -ml-px border-l-2 border-transparent hover:border-accent/50"
                         onClick={() => setActiveModule('blueprint')}
                       >
                         {beat.title}
@@ -216,6 +220,15 @@ export default function Sidebar() {
 
       {/* ── Bottom: Theme toggle, Settings, & Ambient player ── */}
       <div className="border-t border-border-color px-4 py-4 space-y-3">
+        {/* Session stat */}
+        {activeBook && (
+          <div className="flex items-center justify-between px-2 py-1.5">
+            <span className="text-[10px] font-sans uppercase tracking-widest text-muted/60">Session</span>
+            <span className="text-[11px] font-mono text-accent font-medium">
+              {(activeBook.manuscript ? activeBook.manuscript.replace(/<[^>]*>?/gm, '').split(/\s+/).filter(Boolean).length : 0).toLocaleString()} words
+            </span>
+          </div>
+        )}
         <div className="flex items-center justify-between px-2">
           {/* Theme toggle */}
           <button
