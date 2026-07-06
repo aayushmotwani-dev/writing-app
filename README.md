@@ -6,10 +6,6 @@ A premium, highly-aesthetic web-based writing environment designed for authors, 
 
 ## 📸 Gallery
 
-<p align="center">
-  <img src="./public/gallery/typewriter.png" alt="Typewriter Mode" width="48%" />
-  <img src="./public/gallery/neuralnet.png" alt="Neural Net Node Graph" width="48%" />
-</p>
 
 ## ✨ Core Features
 
