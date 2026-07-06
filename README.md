@@ -2,6 +2,15 @@
 
 A premium, highly-aesthetic web-based writing environment designed for authors, screenwriters, and world-builders. Manuscripta combines distraction-free writing with powerful visualization tools, wrapping complex narrative architecture in a clean, native-feeling UI inspired by best-in-class apps like Bear, Linear, and Craft.
 
+**[Live Demo on Vercel](https://writing-app-black-chi.vercel.app)**
+
+## 📸 Gallery
+
+<p align="center">
+  <img src="./public/gallery/typewriter.png" alt="Typewriter Mode" width="48%" />
+  <img src="./public/gallery/neuralnet.png" alt="Neural Net Node Graph" width="48%" />
+</p>
+
 ## ✨ Core Features
 
 *   **Typewriter Mode**: A distraction-free, Tiptap-powered rich text editor with interactive floating toolbars, focus modes, and intelligent text highlighting.
@@ -34,7 +43,9 @@ Manuscripta is built with a focus on "luxurious" web design:
 First, clone the repository and install dependencies:
 
 ```bash
+# Clone the repository
 git clone https://github.com/aayushmotwani-dev/writing-app.git
+```
 cd writing-app
 npm install
 ```
