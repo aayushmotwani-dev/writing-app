@@ -185,7 +185,7 @@ export default function Blueprint() {
                 <line x1="9" y1="3" x2="9" y2="21"></line>
               </svg>
               <p className="text-lg font-medium">Your canvas is empty.</p>
-              <p className="text-sm">Click "+ Add Act" to build your custom structure.</p>
+              <p className="text-sm">Click &quot;+ Add Act&quot; to build your custom structure.</p>
             </div>
           )}
         </div>
@@ -354,7 +354,6 @@ function BeatCardItem({ provided, snapshot, book, beat, isFilteredOut }: { provi
       style={{
         ...provided.draggableProps.style,
         // Optional: keep rotation/scaling when dragging
-        /* eslint-disable-next-line react-hooks/refs */
           transform: snapshot.isDragging 
           ? (provided.draggableProps.style?.transform || "") + " scale(1.02) rotate(1deg)"
           : provided.draggableProps.style?.transform,

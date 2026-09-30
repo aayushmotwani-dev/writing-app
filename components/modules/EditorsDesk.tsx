@@ -187,8 +187,9 @@ export default function EditorsDesk() {
   const manuscript = book?.manuscript;
   const paragraphs = useMemo(() => {
     if (!manuscript) return [];
-    // Strip HTML tags with regex (safe for SSR — no DOM dependency)
-    const plainText = manuscript.replace(/<[^>]*>?/gm, '');
+    // Replace closing paragraph/br tags with newlines to preserve breaks, then strip remaining HTML
+    const withNewlines = manuscript.replace(/<\/p>|<br\s*\/?>/gi, '\n');
+    const plainText = withNewlines.replace(/<[^>]*>?/gm, '');
     return plainText.split(/\n+/).map(p => p.trim()).filter(Boolean);
   }, [manuscript]);
 

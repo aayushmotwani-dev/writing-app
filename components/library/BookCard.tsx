@@ -212,7 +212,7 @@ export default function BookCard({ book, index }: BookCardProps) {
                 </svg>
               </div>
               <p className="text-white font-medium text-sm mb-4">
-                Delete "{book.title}"?
+                Delete &quot;{book.title}&quot;?
               </p>
               <div className="flex gap-2 w-full">
                 <button
