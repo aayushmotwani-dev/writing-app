@@ -2,7 +2,7 @@
 
 A premium, highly-aesthetic web-based writing environment designed for authors, screenwriters, and world-builders. Manuscripta combines distraction-free writing with powerful visualization tools, wrapping complex narrative architecture in a clean, native-feeling UI inspired by best-in-class apps like Bear, Linear, and Craft.
 
-**[Live Demo on Vercel](https://writing-app-black-chi.vercel.app)**
+**[Live Demo on Vercel](https://writingapp-aayush.vercel.app)**
 
 ## 📸 Gallery
 
