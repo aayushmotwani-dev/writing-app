@@ -6,6 +6,10 @@ A premium, highly-aesthetic web-based writing environment designed for authors, 
 
 ## 📸 Gallery
 
+<p align="center">
+  <img src="public/gallery/typewriter.png" width="48%" alt="Typewriter mode editor" />
+  <img src="public/gallery/neuralnet.png" width="48%" alt="Neural Net node graph" />
+</p>
 
 ## ✨ Core Features
 
@@ -39,9 +43,7 @@ Manuscripta is built with a focus on "luxurious" web design:
 First, clone the repository and install dependencies:
 
 ```bash
-# Clone the repository
 git clone https://github.com/aayushmotwani-dev/writing-app.git
-```
 cd writing-app
 npm install
 ```
